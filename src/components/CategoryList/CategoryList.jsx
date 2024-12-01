@@ -10,6 +10,7 @@ const CategoryList = () => {
         { id: 3, title: "culture", slug: "culture", img: "/culture.png" },
         { id: 4, title: "coding", slug: "coding", img: "/coding.png" },
         { id: 5, title: "fashion", slug: "fashion", img: "/fashion.png" },
+        { id: 6, title: "style", slug: "style", img: "/style.png" },
     ];
     return (
         <div className={styles.container}>
