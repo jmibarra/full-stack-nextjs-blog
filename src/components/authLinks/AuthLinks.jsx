@@ -7,7 +7,7 @@ import { useState } from "react";
 const AuthLinks = () => {
     const [open, setOpen] = useState(false);
 
-    const { status } = "unauthenticated"; //useSession();
+    const status = "authenticated"; //useSession();
 
     return (
         <>
@@ -20,7 +20,12 @@ const AuthLinks = () => {
                     <Link href="/write" className={styles.link}>
                         Write
                     </Link>
-                    <span className={styles.link} onClick={() => signOut({ callbackUrl: "/" })}>
+                    <span
+                        className={styles.link}
+                        onClick={() => {
+                            alert("Logout");
+                        }}
+                    >
                         Logout
                     </span>
                 </>
@@ -35,7 +40,7 @@ const AuthLinks = () => {
                     <Link href="/">Homepage</Link>
                     <Link href="/">About</Link>
                     <Link href="/">Contact</Link>
-                    {status === "notauthenticated" ? (
+                    {status === "unauthenticated" ? (
                         <Link href="/login">Login</Link>
                     ) : (
                         <>
