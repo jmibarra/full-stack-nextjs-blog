@@ -2,6 +2,7 @@ import Menu from "@/components/Menu/Menu";
 import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Comments from "@/components/commets/Comments";
+import { formatDate } from "@/utils/dateUtils";
 
 const getData = async (slug) => {
     const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
@@ -33,7 +34,7 @@ const SinglePage = async ({ params }) => {
                         )}
                         <div className={styles.userTextContainer}>
                             <span className={styles.username}>{data?.user.name}</span>
-                            <span className={styles.date}>01.01.2024</span>
+                            <span className={styles.date}>{formatDate(data.createdAt)}</span>
                         </div>
                     </div>
                 </div>
