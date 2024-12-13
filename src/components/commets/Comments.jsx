@@ -6,6 +6,7 @@ import Image from "next/image";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { formatDate } from "@/utils/dateUtils";
 
 /**
  * A fetcher function for use with the SWR hook.
@@ -79,7 +80,7 @@ const Comments = ({ postSlug }) => {
                                   {item?.user?.image && <Image src={item.user.image} alt="" width={50} height={50} className={styles.image} />}
                                   <div className={styles.userInfo}>
                                       <span className={styles.username}>{item.user.name}</span>
-                                      <span className={styles.date}>{item.createdAt}</span>
+                                      <span className={styles.date}>{formatDate(item.createdAt)}</span>
                                   </div>
                               </div>
                               <p className={styles.desc}>{item.desc}</p>
