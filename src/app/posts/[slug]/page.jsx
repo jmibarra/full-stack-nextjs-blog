@@ -18,17 +18,7 @@ const getData = async (slug) => {
 const SinglePage = async ({ params }) => {
     const { slug } = params;
 
-    const data = {
-        title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quisquam.",
-        img: "/p1.jpeg",
-        user: {
-            name: "John Doe",
-            image: "/p1.jpeg",
-        },
-    };
-
-    //await getData(slug);
+    const data = await getData(slug);
 
     return (
         <div className={styles.container}>
