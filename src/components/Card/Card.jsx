@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
+import { formatDate } from "@/utils/dateUtils";
 
 const Card = ({ key, item }) => {
     return (
@@ -12,7 +13,7 @@ const Card = ({ key, item }) => {
             )}
             <div className={styles.textContainer}>
                 <div className={styles.detail}>
-                    <span className={styles.date}>{item.createdAt.substring(0, 10)} - </span>
+                    <span className={styles.date}>{formatDate(item.createdAt)} - </span>
                     <span className={styles.category}>{item.catSlug}</span>
                 </div>
                 <Link href={`/posts/${item.slug}`}>
