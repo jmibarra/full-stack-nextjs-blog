@@ -3,10 +3,20 @@
 import Link from "next/link";
 import styles from "./comments.module.css";
 import Image from "next/image";
-//import useSWR from "swr";
-//import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
+/**
+ * A fetcher function for use with the SWR hook.
+ *
+ * The function makes a GET request to the given url and returns the response as JSON.
+ * If the response is not OK (status code 200-299), it throws an error.
+ *
+ * @param {string} url The url to make the request to.
+ * @returns {Promise<Object>} A promise resolving to the response as JSON.
+ * @throws {Error} If the response is not OK.
+ */
 const fetcher = async (url) => {
     const res = await fetch(url);
 
@@ -20,36 +30,24 @@ const fetcher = async (url) => {
     return data;
 };
 
+/**
+ * Comments component for displaying comments on a post
+ *
+ * The component displays the comments section for a given post. If the user is authenticated, it displays a textarea for writing a comment and a send button. If the user is not authenticated, it displays a link to the login page.
+ *
+ * The component uses the SWR hook to fetch the comments from the server. It also uses the useSession hook from next-auth to check if the user is authenticated.
+ *
+ * The component displays the comments in a list. Each comment is rendered as a div with the user's name, date and the comment text.
+ *
+ * @param {string} postSlug The slug of the post the comments belong to.
+ * @returns A JSX element displaying the comments.
+ */
 const Comments = ({ postSlug }) => {
-    //const { status } = useSession();
+    const { status } = useSession();
 
-    /*const { data, mutate, isLoading } = useSWR(
-    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
-    fetcher
-  ); */
+    const { data, mutate, isLoading } = useSWR(`http://localhost:3000/api/comments?postSlug=${postSlug}`, fetcher);
 
     const [desc, setDesc] = useState("");
-
-    const data = [
-        {
-            _id: 1,
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quisquam.",
-            user: {
-                image: "/p1.jpeg",
-                name: "John Doe",
-            },
-        },
-        {
-            _id: 2,
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quisquam.",
-            user: {
-                image: "/p1.jpeg",
-                name: "John Doe",
-            },
-        },
-    ];
-    const isLoading = false;
-    const mutate = () => {};
 
     const handleSubmit = async () => {
         await fetch("/api/comments", {
